@@ -11,6 +11,11 @@ RUN apt-get update && apt-get install -y curl && \
 # Copy project files
 COPY . ./
 
+# Pre-install frontend dependencies to avoid Maven npm issues
+WORKDIR /app/src/main/frontend
+RUN npm ci || npm install
+WORKDIR /app
+
 # Build the project without running tests
 RUN mvn clean package -DskipTests
 
