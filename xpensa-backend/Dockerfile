@@ -1,7 +1,17 @@
-# Step 1 — Build backend
+# Step 1 — Build backend (with Node.js for frontend-maven-plugin)
 FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
+
+# Install Node.js & npm (LTS version)
+RUN apt-get update && apt-get install -y curl && \
+    curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
+    apt-get install -y nodejs && \
+    node -v && npm -v
+
+# Copy project files
 COPY . ./
+
+# Build the project without running tests
 RUN mvn clean package -DskipTests
 
 # Step 2 — Run Spring Boot JAR
