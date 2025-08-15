@@ -16,7 +16,7 @@ RUN npm install && npm run build
 
 # Copy frontend build into backend
 RUN mkdir -p /app/xpensa-backend/src/main/resources/static && \
-    cp -r build/* /app/xpensa-backend/src/main/resources/static/
+    cp -r dist/* /app/xpensa-backend/src/main/resources/static/
 
 # Build backend
 WORKDIR /app/xpensa-backend
