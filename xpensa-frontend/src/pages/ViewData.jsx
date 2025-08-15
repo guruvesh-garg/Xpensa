@@ -29,7 +29,7 @@ import { Edit, Delete, ArrowBack } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import MainLayout from "../components/layout/MainLayout";
 
-const API_BASE_URL = "http://localhost:8080/expensa";
+const API_BASE_URL = "https://xpensaprod.onrender.com/expensa";
 
 const ViewData = () => {
   const navigate = useNavigate();

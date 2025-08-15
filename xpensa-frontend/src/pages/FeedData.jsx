@@ -94,7 +94,7 @@ const FeedData = () => {
   }));
 
   try {
-    const response = await fetch("http://localhost:8080/expensa/addExpense", {
+    const response = await fetch("https://xpensaprod.onrender.com/expensa/addExpense", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
