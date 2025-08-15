@@ -1,7 +1,7 @@
-# Step 1 — Build backend with frontend included
+# Step 1 — Build backend
 FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
-COPY . .
+COPY xpensa-backend/ ./
 RUN mvn clean package -DskipTests
 
 # Step 2 — Run Spring Boot JAR
