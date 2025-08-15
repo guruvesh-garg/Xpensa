@@ -20,7 +20,7 @@ RUN mkdir -p /app/xpensa-backend/src/main/resources/static && \
 
 # Build backend
 WORKDIR /app/xpensa-backend
-RUN mvn clean package -DskipTests
+RUN mvn clean package spring-boot:repackage -DskipTests
 
 # Step 2 — Run JAR
 FROM eclipse-temurin:17-jdk
