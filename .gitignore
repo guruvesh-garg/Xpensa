@@ -15,6 +15,7 @@ yarn-error.log
 .env
 .env.local
 
+
 # IDEs & OS
 /.idea/
 .vscode/
@@ -31,3 +32,6 @@ rm Xpensa-backend/src/main/resources/expensa-db-a0532216e581.json
 
 # Add file to .gitignore so it never gets committed again
 echo "Xpensa-backend/src/main/resources/expensa-db-a0532216e581.json" >> .gitignore
+
+
+
