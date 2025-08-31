@@ -26,6 +26,8 @@ Thumbs.db
 # Logs
 *.log
 
+#secrets
+Xpensa\xpensa-backend\src\main\resources\application-secrets.properties
 
 # Remove the file from your project (working directory)
 rm Xpensa-backend/src/main/resources/expensa-db-a0532216e581.json

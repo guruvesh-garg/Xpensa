@@ -3,6 +3,7 @@ package com.example.xpensa.handler;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -20,11 +21,16 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
 
     @Autowired
     private UserRepository userRepository;
+    
+    @Value("${frontend.url}")
+    private String redirectUrl;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
         Object principal = authentication.getPrincipal();
+        
+        
 
         if (!(principal instanceof OAuth2User)) {
             throw new IllegalStateException("Authentication principal is not an OAuth2User");
@@ -51,8 +57,9 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
 
         // Store user in session
         request.getSession().setAttribute("user", user);
-
+        
+        
         // Redirect to frontend
-        response.sendRedirect("http://localhost:8080/mode-selection");
+        response.sendRedirect(redirectUrl+"/mode-selection");
     }
 }

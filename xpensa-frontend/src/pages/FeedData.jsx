@@ -84,9 +84,8 @@ const FeedData = () => {
       setConfirmDialog(true)
     }
   }
-  // const API_BASE_URL = "https://xpensaprod.onrender.com/expensa";
-  const API_BASE_URL = "http://localhost:8080/expensa/addExpense";
-  console.log(API_BASE_URL);
+  
+  const API_BASE_URL = import.meta.env.VITE_BACKEND_URL + "/expensa/addExpense";
   const handleConfirmSubmit = async () => {
   const payload = rows.map((row) => ({
     date: row.date.toISOString().split("T")[0], // format: yyyy-MM-dd
