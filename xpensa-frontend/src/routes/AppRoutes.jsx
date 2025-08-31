@@ -1,4 +1,3 @@
-"use client"
 import { Routes, Route, Navigate } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 import { CircularProgress, Box } from "@mui/material"
@@ -64,8 +63,8 @@ const AppRoutes = () => {
           </ProtectedRoute>
         }
       />
-      <Route path="/" element={<Navigate to="/mode-selection" />} />
-      <Route path="*" element={<Navigate to="/mode-selection" />} />
+      <Route path="/" element={<Navigate to="/login" />} />
+      <Route path="*" element={<Navigate to="/login" />} />
     </Routes>
   )
 }

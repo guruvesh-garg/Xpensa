@@ -15,49 +15,28 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const token = localStorage.getItem("authToken")
-    const userData = localStorage.getItem("userData")
-
-    if (token && userData) {
-      setUser(JSON.parse(userData))
+    const checkBackendAuth = async () => {
+      try {
+        const res = await fetch("/api/auth/status") // same origin
+        if (res.ok) {
+          const data = await res.json()
+          setUser(data)
+        } else {
+          setUser(null)
+        }
+      } catch (error) {
+        console.error("Session check failed:", error)
+        setUser(null)
+      } finally {
+        setLoading(false)
+      }
     }
-    setLoading(false)
+
+    checkBackendAuth()
   }, [])
 
-  const login = async (email, password) => {
-    try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-
-      // Mock successful login
-      const userData = { id: 1, email, name: email.split("@")[0] }
-      const token = "mock-jwt-token"
-
-      localStorage.setItem("authToken", token)
-      localStorage.setItem("userData", JSON.stringify(userData))
-      setUser(userData)
-
-      return { success: true }
-    } catch (error) {
-      return { success: false, error: "Login failed" }
-    }
-  }
-
-  const signup = async (email, password, name) => {
-    try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-
-      // Mock successful signup
-      return { success: true }
-    } catch (error) {
-      return { success: false, error: "Signup failed" }
-    }
-  }
-
-  const logout = () => {
-    localStorage.removeItem("authToken")
-    localStorage.removeItem("userData")
+  const logout = async () => {
+    await fetch("/api/auth/logout", { method: "POST" })
     setUser(null)
   }
 
@@ -66,8 +45,6 @@ export const AuthProvider = ({ children }) => {
       value={{
         user,
         loading,
-        login,
-        signup,
         logout,
         isAuthenticated: !!user,
       }}

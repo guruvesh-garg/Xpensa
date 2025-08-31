@@ -84,7 +84,9 @@ const FeedData = () => {
       setConfirmDialog(true)
     }
   }
-
+  // const API_BASE_URL = "https://xpensaprod.onrender.com/expensa";
+  const API_BASE_URL = "http://localhost:8080/expensa/addExpense";
+  console.log(API_BASE_URL);
   const handleConfirmSubmit = async () => {
   const payload = rows.map((row) => ({
     date: row.date.toISOString().split("T")[0], // format: yyyy-MM-dd
@@ -94,7 +96,7 @@ const FeedData = () => {
   }));
 
   try {
-    const response = await fetch("https://xpensaprod.onrender.com/expensa/addExpense", {
+    const response = await fetch(API_BASE_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
